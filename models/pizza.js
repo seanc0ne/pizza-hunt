@@ -3,23 +3,29 @@ const moment = require('moment');
 
 const PizzaSchema = new Schema(
     {
-      pizzaName: {
-        type: String
-      },
-      createdBy: {
-        type: String
-      },
-      createdAt: {
+    pizzaName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    createdBy: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    createdAt: {
         type: Date,
         default: Date.now,
         get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
-      },
-      size: {
+    },
+    size: {
         type: String,
+        required: true,
+        enum: ['Personal', 'Small', 'Medium', 'Large', 'Extra Large'],
         default: 'Large'
-      },
-      toppings: [],
-      comments: [
+    },
+    toppings: [],
+    comments: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Comment'
